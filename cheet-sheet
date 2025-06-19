@@ -1,0 +1,88 @@
+pwd                         # Print current working directory
+cd /                        # Change directory to root
+ls -al                      # List all files (including hidden) in long format
+ls -lt                      # List files sorted by modification time (newest first)
+clear                       # Clear the terminal screen
+
+mkdir                       # Create a new directory
+touch                       # Create an empty file
+rm                          # Remove files or directories
+mv                          # Move or rename files/directories
+cp                          # Copy files or directories
+cat                         # Concatenate and display file contents
+vi                          # Open file in vi editor
+
+head                        # Show first 10 lines of a file
+head -5 filename            # Show first 5 lines of 'filename'
+tail                        # Show last 10 lines of a file
+tail -5 filename            # Show last 5 lines of 'filename'
+
+echo                        # Print text to terminal
+echo $SHELL                 # Print current shell
+echo "My name is Shubham" > linux       # Write text to file (overwrites)
+history                     # Show command history
+echo "$(history)" > history.txt         # Save history to a file
+echo -e "18\n06\n2025" >> linux         # Append multiline text to a file using escape characters
+
+man echo                    # Show manual page for 'echo'
+
+sudo                        # Execute a command as superuser
+sudo su -                   # Switch to root user (login shell)
+ctrl + d / exit             # Exit terminal or root shell
+
+sudo apt update             # Update package lists
+sudo apt upgrade            # Upgrade all upgradable packages
+sudo apt install nginx      # Install nginx web server
+sudo systemctl status nginx # Check status of nginx service
+sudo systemctl stop nginx   # Stop nginx service
+sudo systemctl start nginx  # Start nginx service
+sudo systemctl restart nginx# Restart nginx service
+sudo apt search nginx       # Search for nginx package
+sudo apt remove nginx       # Remove nginx package
+
+cat .bashrc                 # Display contents of .bashrc configuration file
+alias                       # List all defined aliases
+alias test='ls -l'        # Create alias named 'test' for 'ls -l'
+bash -l                     # Start a login shell
+
+date                        # Display current date and time
+
+chown                       # Change file owner and group
+sudo chown -R ubuntu:ubuntu dhananjay   # Recursively change owner of 'dhananjay' directory to 'ubuntu'
+
+chmod 777 filename          # Full permissions to everyone (rwxrwxrwx)
+chmod 755 filename          # Owner: rwx, Group & Others: rx (rwxr-xr-x)
+chmod 644 filename          # Owner: rw, Group & Others: r (rw-r--r--)
+
+lsblk                       # List info about block devices
+df -h                       # Show disk space usage in human-readable format
+df                          # Show disk space usage (default format)
+du -sh                      # Show total size of current directory
+du -h                       # Show disk usage in human-readable format
+du -sh test1/             # Show size of 'test1' directory
+du -sh *                    # Show size of all items in current directory
+
+grep                        # Search text using patterns
+grep -i "error" /var/log/syslog      # Case-insensitive search for 'error' in syslog
+grep "error" /var/log/syslog         # Case-sensitive search
+grep -iR 'error' /var/log            # Recursive case-insensitive search in /var/log
+history | grep ls                    # Find all commands in history that used 'ls'
+
+find                         # Search for files and directories
+find . -name "*.txt"         # Find all .txt files in current directory
+find /var/log/ -name "*.log" -mtime -7    # Find .log files modified in last 7 days
+sudo find /var/log -type f -size +1M      # Find files larger than 1MB in /var/log
+find -type f -perm 0777      # Find files with 777 (full) permissions
+
+ln -s /var/log/nginx/access.log ~/access_log_link   # Create symbolic link to access.log
+
+htop                        # Interactive process viewer (better than top)
+ps                          # Show snapshot of current processes
+top                         # Real-time process monitoring
+lsof                        # List open files and the processes using them
+
+ps aux                      # Detailed info on all processes
+pgrep                       # Search processes by name and return PID(s)
+pidof                       # Get PID of a specific process
+
+ps aux | grep nginx         # Search for nginx processes
