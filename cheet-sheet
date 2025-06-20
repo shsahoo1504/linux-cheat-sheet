@@ -86,3 +86,154 @@ pgrep                       # Search processes by name and return PID(s)
 pidof                       # Get PID of a specific process
 
 ps aux | grep nginx         # Search for nginx processes
+
+pwd                         # Print current working directory
+cd /                        # Change directory to root
+ls -al                      # List all files (including hidden) in long format
+ls -lt                      # List files sorted by modification time (newest first)
+clear                       # Clear the terminal screen
+
+mkdir                       # Create a new directory
+touch                       # Create an empty file
+rm                          # Remove files or directories
+mv                          # Move or rename files/directories
+cp                          # Copy files or directories
+cat                         # Concatenate and display file contents
+vi                          # Open file in vi editor
+
+head                        # Show first 10 lines of a file
+head -5 filename            # Show first 5 lines of 'filename'
+tail                        # Show last 10 lines of a file
+tail -5 filename            # Show last 5 lines of 'filename'
+
+echo                        # Print text to terminal
+echo $SHELL                 # Print current shell
+echo "My name is Shubham" > linux       # Write text to file (overwrites)
+history                     # Show command history
+echo "$(history)" > history.txt         # Save history to a file
+echo -e "18\n06\n2025" >> linux         # Append multiline text to a file using escape characters
+
+man echo                    # Show manual page for 'echo'
+
+sudo                        # Execute a command as superuser
+sudo su -                   # Switch to root user (login shell)
+ctrl + d / exit             # Exit terminal or root shell
+
+sudo apt update             # Update package lists
+sudo apt upgrade            # Upgrade all upgradable packages
+sudo apt install nginx      # Install nginx web server
+sudo systemctl status nginx # Check status of nginx service
+sudo systemctl stop nginx   # Stop nginx service
+sudo systemctl start nginx  # Start nginx service
+sudo systemctl restart nginx# Restart nginx service
+sudo apt search nginx       # Search for nginx package
+sudo apt remove nginx       # Remove nginx package
+
+cat .bashrc                 # Display contents of .bashrc configuration file
+alias                       # List all defined aliases
+alias test='ls -l'        # Create alias named 'test' for 'ls -l'
+bash -l                     # Start a login shell
+
+date                        # Display current date and time
+
+chown                       # Change file owner and group
+sudo chown -R ubuntu:ubuntu dhananjay   # Recursively change owner of 'dhananjay' directory to 'ubuntu'
+
+chmod 777 filename          # Full permissions to everyone (rwxrwxrwx)
+chmod 755 filename          # Owner: rwx, Group & Others: rx (rwxr-xr-x)
+chmod 644 filename          # Owner: rw, Group & Others: r (rw-r--r--)
+
+lsblk                       # List info about block devices
+df -h                       # Show disk space usage in human-readable format
+df                          # Show disk space usage (default format)
+du -sh                      # Show total size of current directory
+du -h                       # Show disk usage in human-readable format
+du -sh test1/             # Show size of 'test1' directory
+du -sh *                    # Show size of all items in current directory
+
+grep                        # Search text using patterns
+grep -i "error" /var/log/syslog      # Case-insensitive search for 'error' in syslog
+grep "error" /var/log/syslog         # Case-sensitive search
+grep -iR 'error' /var/log            # Recursive case-insensitive search in /var/log
+history | grep ls                    # Find all commands in history that used 'ls'
+
+find                         # Search for files and directories
+find . -name "*.txt"         # Find all .txt files in current directory
+find /var/log/ -name "*.log" -mtime -7    # Find .log files modified in last 7 days
+sudo find /var/log -type f -size +1M      # Find files larger than 1MB in /var/log
+find -type f -perm 0777      # Find files with 777 (full) permissions
+
+ln -s /var/log/nginx/access.log ~/access_log_link   # Create symbolic link to access.log
+
+htop                        # Interactive process viewer (better than top)
+ps                          # Show snapshot of current processes
+top                         # Real-time process monitoring
+lsof                        # List open files and the processes using them
+
+ps aux                      # Detailed info on all processes
+pgrep                       # Search processes by name and return PID(s)
+pidof                       # Get PID of a specific process
+
+ps aux | grep nginx         # Search for nginx processes
+
+
+##########################################################
+# Process, Memory and Storage Management
+##########################################################
+
+sudo groupadd developers                   # Create group 'developers'
+sudo groupadd testers                      # Create group 'testers'
+sudo groupadd project_managers             # Create group 'project_managers'
+
+sudo useradd -m -G developers john_doe     # Add user 'john_doe' with home dir and add to 'developers' group
+sudo passwd john_doe                       # Set password for 'john_doe'
+
+sudo mkdir -p /var/www/html/project_source         # Create directory for project source code
+sudo mkdir -p /var/www/html/project_testing        # Create directory for project testing
+sudo mkdir -p /var/www/html/project_reports        # Create directory for project reports
+
+sudo chown -R :developers /var/www/html/project_source       # Change group ownership to 'developers'
+sudo chown -R :testers /var/www/html/project_testing         # Change group ownership to 'testers'
+sudo chown -R :project_managers /var/www/html/project_reports # Change group ownership to 'project_managers'
+
+sudo setfacl -m u:project_manager:rwx /var/www/proje_testing/specific_directory  # Give 'project_manager' rwx on a specific directory
+sudo setfacl -m u:dhananjay:rw project.txt               # Give user 'dhananjay' read/write access to project.txt
+
+nice                                                     # Show/process nice value of a command
+renice                                                    # Change priority (nice value) of a running process
+
+ps aux | grep cpu_task.sh                                # Find 'cpu_task.sh' process
+top                                                      # Show live process and resource usage
+top -p <PID>                                             # Show top only for specific PID
+
+renice +10 -p <PID>                                      # Lower priority (more nice) for process
+sudo renice -5 -p <PID>                                  # Increase priority (less nice) for process
+sudo nice -n -10 ./cpu_task.sh &                         # Start a new process with higher priority (negative nice)
+
+mkfifo /tmp/logpipe                                      # Create a named pipe (FIFO) for IPC
+cat /tmp/logpipe >> /var/log/myapp_runtime.log &         # Continuously write pipe data to log file
+echo "Log message at $(date)" > /tmp/logpipe             # Write message to the pipe
+
+pkill -f cpu_task.sh                                     # Kill process matching name 'cpu_task.sh'
+kill -STOP 1234                                          # Pause process with PID 1234
+kill -CONT 1234                                          # Resume paused process
+kill -9 1234                                             # Force kill process with PID 1234
+
+ps aux | grep defunct                                    # Check for zombie (defunct) processes
+ps -eo pid,ppid,state,cmd | grep defunct                 # List zombie processes with parent info
+ps aux | grep 'z'                                        # Find zombie processes (state 'Z')
+
+sudo chown user1:group1 file.txt                         # Change ownership of file to user1 and group1
+setfacl -m u:user1:r file.txt                            # Give user1 read permission via ACL
+setfacl -m u:user2:rw file.txt                           # Give user2 read/write permission via ACL
+
+chown user1:group1 file.txt                              # Change file ownership again (redundant entry)
+chmod 640 file.txt                                       # Set file permissions: rw- r-- ---
+
+setfacl -m u:user1:rw file.txt                           # Add ACL: user1 has read/write
+setfacl -x u:user1 file.txt                              # Remove user1's ACL entry
+
+chown root:root file.txt                                 # Change file ownership to root
+
+
+
