@@ -235,5 +235,23 @@ setfacl -x u:user1 file.txt                              # Remove user1's ACL en
 
 chown root:root file.txt                                 # Change file ownership to root
 
+cat /proc/meminfo                                        # Shows detailed memory statistics from the kernel
+free -h                                                  # Displays free and used memory in human-readable format
+htop                                                     # Interactive process viewer with real-time memory & CPU usage
+vmstat                                                   # Reports system memory, CPU, IO, and process statistics
+pmap <pid>                                               # Shows memory map of a process by its PID
+watch free -h                                            # Refreshes free -h output every 2s to monitor memory changes
+dmesg | grep -i memory                                   # Displays kernel ring buffer logs related to memory
+smem -rs size                                            # Displays memory usage per process, sorted by size
+sudo swapoff -a                                          # Disables all swap devices and files
+sudo swapon -a                                           # Enables all swap devices and files
+watch -n 5 'pmap -x 515 | tail -n 1'                     # Monitors memory usage of process 515 every 5s
+sync                                                     # Flushes filesystem buffers to disk
+echo 3 | sudo tee /proc/sys/vm/drop_caches               # Drops page cache, dentries, and inodes (free cache memory)
+flock -n /tmp/lock.file -c "echo 'running critical task'; sleep 10"  # Prevents concurrent execution using a lock file
+sudo slabtop                                             # Real-time kernel slab cache usage report
+cat /proc/meminfo | grep -i slab                         # Shows slab allocator memory usage from /proc/meminfo
+grep -E 'Slab|SReclaimable|SUnreclaim' /proc/meminfo     # Filters slab memory details: reclaimable vs unreclaimable
+sudo smem -rp pid,uss,pss,rss,top | head                 # Lists processes with detailed memory usage (USS, PSS, RSS), sorted by PID
 
 
