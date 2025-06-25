@@ -254,4 +254,29 @@ cat /proc/meminfo | grep -i slab                         # Shows slab allocator 
 grep -E 'Slab|SReclaimable|SUnreclaim' /proc/meminfo     # Filters slab memory details: reclaimable vs unreclaimable
 sudo smem -rp pid,uss,pss,rss,top | head                 # Lists processes with detailed memory usage (USS, PSS, RSS), sorted by PID
 
+##############################################
+wild cards
+##############################################
+
+# Create test files for pattern matching
+touch report1.txt report2.txt report10.txt \
+      data1.csv data2.csv data_backup.csv \
+      image1.png image2.jpeg image_final.png \
+      notes.docx notes1.docx draft_notes.docx \
+      script.sh script1.sh script_old.sh \
+      Afile.txt Bfile.txt zfile.txt
+
+# Wildcard Examples
+
+ls *.txt               # List all files ending with .txt  
+ls image*              # List all files starting with 'image'  
+ls report*.txt         # List all files starting with 'report' and ending in .txt  
+ls report?.txt         # Match 'report' followed by exactly one character, ending in .txt  
+ls script?.sh          # Match 'script' followed by exactly one character, ending in .sh  
+ls [AB]file.txt        # Match Afile.txt or Bfile.txt only  
+ls report[1-2].txt     # Match report1.txt or report2.txt  
+ls report[0-9][0-9].txt # Match report followed by any two digits (00 to 99), ending in .txt  
+ls [!A-B]*.txt         # List all .txt files not starting with A or B  
+ls data[!1].csv        # Match data*.csv except data1.csv  
+ls data?.csv           # Match data followed by exactly one character, ending in .csv  
 
